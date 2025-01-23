@@ -154,8 +154,8 @@ class App extends Component {
               hidden={this.state.turn == 1}
             />
             <canvas id={"canvas"} style={{zIndex: 20, position: 'relative'}} ref={this.canvasRef}
-                        width={500}
-                        height={500}
+                        width={800}
+                        height={800}
                         onMouseDown={
                             e => {
                                 let nativeEvent = e.nativeEvent;
@@ -176,11 +176,9 @@ class App extends Component {
           <Box sx={{justifyItems: "center", margin: 2}}>
             <ContinuumCard left={selected_pair[0]} right={selected_pair[1]}/>
           </Box>
-          <Box>
-            <Button variant="contained" onClick={button_action} style={{maxWidth: 275}}>
+            <Button variant="contained" onClick={button_action}>
               {button_text}
             </Button>
-          </Box>
 
         </Stack>
       </div>

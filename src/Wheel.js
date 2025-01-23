@@ -11,12 +11,12 @@ class Wheel extends Component {
         <img src={wheel_img} style={{
             transform: rotation_string,
             position: 'absolute',
-            width: 500
+            width: 800
         }} />
         );
     } else {
         return (
-            <img src={hidden_wheel} style={{position: 'absolute', width: 500}}/>
+            <img src={hidden_wheel} style={{position: 'absolute', width: 800}}/>
         )
     }
     }
