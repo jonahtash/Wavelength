@@ -42,10 +42,11 @@ class App extends Component {
     if (this.state.choiceMade) {
       const canvas = this.canvasRef.current;
       var ctx = canvas.getContext("2d");
+      var center = canvas.width / 2;
       ctx.beginPath();
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.strokeStyle = "red";
-      ctx.moveTo(400, 400);
+      ctx.moveTo(center, center);
       ctx.lineTo(this.state.prevX, this.state.prevY);
       ctx.stroke();
       ctx.closePath();
@@ -72,8 +73,9 @@ class App extends Component {
     
     const canvas = this.canvasRef.current;
     if (event.offsetY < canvas.height / 2) {
-      var vX = event.offsetX - 400;
-      var vY = event.offsetY - 400;
+      var center = canvas.height / 2;
+      var vX = event.offsetX - center;
+      var vY = event.offsetY - center;
       var uX = vX / (Math.sqrt(Math.pow(vX, 2) + Math.pow(vY, 2)));
       var uY = vY / (Math.sqrt(Math.pow(vX, 2) + Math.pow(vY, 2)));
       var ctx = canvas.getContext("2d");
@@ -81,12 +83,12 @@ class App extends Component {
       ctx.strokeStyle = "red";
       ctx.beginPath();
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.moveTo(400, 400);
-      ctx.lineTo(uX * 400 + 400, uY * 400 + 400);
+      ctx.moveTo(center, center);
+      ctx.lineTo(uX * center + center, uY * center + center);
       ctx.stroke();
       this.setState({choiceMade: true,
-        prevX: uX * 400 + 400,
-        prevY: uY * 400 + 400
+        prevX: uX * center + center,
+        prevY: uY * center + center
       });
       ctx.closePath();
     }
@@ -97,8 +99,9 @@ class App extends Component {
     }
     const canvas = this.canvasRef.current;
     if (event.offsetY < canvas.height / 2) {
-      var vX = event.offsetX - 400;
-      var vY = event.offsetY - 400;
+      var center = canvas.height / 2;
+      var vX = event.offsetX - center;
+      var vY = event.offsetY - center;
       var uX = vX / (Math.sqrt(Math.pow(vX, 2) + Math.pow(vY, 2)));
       var uY = vY / (Math.sqrt(Math.pow(vX, 2) + Math.pow(vY, 2)));
       var ctx = canvas.getContext("2d");
@@ -109,15 +112,15 @@ class App extends Component {
       if (this.state.choiceMade) {
         ctx.beginPath();
         ctx.strokeStyle = "red";
-        ctx.moveTo(400, 400);
+        ctx.moveTo(center, center);
         ctx.lineTo(this.state.prevX, this.state.prevY);
         ctx.stroke();
         ctx.closePath();
       }
       ctx.beginPath();
       ctx.strokeStyle = "pink";
-      ctx.moveTo(400, 400);
-      ctx.lineTo(uX * 400 + 400, uY * 400 + 400);
+      ctx.moveTo(center, center);
+      ctx.lineTo(uX * center + center, uY * center + center);
       ctx.stroke();
       ctx.closePath();
     }
@@ -151,8 +154,8 @@ class App extends Component {
               hidden={this.state.turn == 1}
             />
             <canvas id={"canvas"} style={{zIndex: 20, position: 'relative'}} ref={this.canvasRef}
-                        width={800}
-                        height={800}
+                        width={500}
+                        height={500}
                         onMouseDown={
                             e => {
                                 let nativeEvent = e.nativeEvent;
@@ -173,9 +176,12 @@ class App extends Component {
           <Box sx={{justifyItems: "center", margin: 2}}>
             <ContinuumCard left={selected_pair[0]} right={selected_pair[1]}/>
           </Box>
-          <Button variant="contained" onClick={button_action}>
-            {button_text}
-          </Button>
+          <Box>
+            <Button variant="contained" onClick={button_action} style={{maxWidth: 275}}>
+              {button_text}
+            </Button>
+          </Box>
+
         </Stack>
       </div>
     );
